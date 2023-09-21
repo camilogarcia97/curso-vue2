@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Formas de mostrar datos en el DOM</h1>
+      <div class="main">
+        <!--Permite enlazar atributos HTML a datos en tu modelo de Vue-->
+        <img class="img-btc" v-bind:src="img" v-bind:alt="name" />
+        <div class="text">
+          <p># <strong>v-if, v-else, v-else-if</strong></p>
+          <h1>
+            {{ name }}
+            <span v-if="changePercent > 0">👍</span>
+            <span v-else-if="changePercent < 0">👎</span>
+            <span v-else>🤞</span>
+          </h1>
+          <br />
+          <p>
+            # <strong>v-show</strong>
+            <br />
+            siempre hay que usar la variable para hacer la comparacion a
+            diferencia de v-if, v-else-if y v-else.
+          </p>
+          <h1>
+            {{ name }}
+            <span v-show="changePercent > 0">👍</span>
+            <span v-show="changePercent < 0">👎</span>
+            <span v-show="changePercent === 0">🤞</span>
+          </h1>
+          <br />
+          <p># <strong>operador ternario</strong></p>
+          <h1>
+            {{ name }}
+            <!--Esta es otra forma de imprimir los datos de pendiendo de su valor en DATA-->
+            <span
+              >{{changePercent > 0 ? '👍':changePercent < 0 ? '👎':'🤞'}}</span
+            >
+          </h1>
+        </div>
+      </div>
+      <p># <strong>Usando v-for</strong></p>
+      <p class="pricosBtc">Precios del bitcoin esta semana</p>
+      <div class="for">
+        <!--<ul>
+          Princes es la propiedad dentro de de DATA, p es la representacion de cada uno de esos elemento
+          La propiedad key le permite a vue identifica a vue cada elemento sin perder el trackeo
+          Usamos v-bind:key para decirle que llave es cada uno de los precios del arreglo
+          Se puedes mostrar ademas del valor, el indice agregando el argumento i en la segunda posicion
+          tambien se puede mostrar en pantalla
+          <li v-for="(p, i) in prices" v-bind:key="p">{{ i }} - {{ p }}</li>
+        </ul>-->
+        <button v-on:click="toggleShowPrices">{{ showPrices ? 'Ocultar precios' : 'Mostrar precios'}}</button>
+        <ul v-show=showPrices>
+          <li v-for="(p, i) in pricesWithDays" v-bind:key="p.day">
+            {{ i }} - {{ p.day }}: ${{ p.value }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
