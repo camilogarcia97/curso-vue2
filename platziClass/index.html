@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -8,15 +9,23 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="app">
-      <h1>Formas de mostrar datos en el DOM</h1>
+    <div id="app" :style="{background:  '#'+color, color: txtColor}">
+      <div class="top">
+        <h1>Formas de mostrar datos en el DOM</h1>
+      <button v-on:click="darkMode">Dark mode</button>
+      </div>
       <div class="main">
         <!--Permite enlazar atributos HTML a datos en tu modelo de Vue-->
-        <img class="img-btc" v-bind:src="img" v-bind:alt="name" />
+        <img
+          v-bind:src="img1"
+          v-on:mouseover="ChangeImg"
+          v-on:mouseout="setMainImg"
+          class="img-btc"  
+          v-bind:alt="name"/>
         <div class="text">
           <p># <strong>v-if, v-else, v-else-if</strong></p>
-          <h1>
-            {{ name }}
+          <h1 v-bind:class="changePercent > 0 ? 'green' : (changePercent < 0 ? 'red' : 'black')">
+            {{ title }}
             <span v-if="changePercent > 0">👍</span>
             <span v-else-if="changePercent < 0">👎</span>
             <span v-else>🤞</span>
@@ -28,16 +37,16 @@
             siempre hay que usar la variable para hacer la comparacion a
             diferencia de v-if, v-else-if y v-else.
           </p>
-          <h1>
-            {{ name }}
+          <h1 v-bind:class="changePercent > 0 ? 'green' : (changePercent < 0 ? 'red' : 'black')">
+            {{ name }}  - {{ symbol }}
             <span v-show="changePercent > 0">👍</span>
             <span v-show="changePercent < 0">👎</span>
             <span v-show="changePercent === 0">🤞</span>
           </h1>
           <br />
           <p># <strong>operador ternario</strong></p>
-          <h1>
-            {{ name }}
+          <h1 v-bind:class="changePercent > 0 ? 'green' : (changePercent < 0 ? 'red' : 'black')">
+            {{ name }}  - {{ symbol }}
             <!--Esta es otra forma de imprimir los datos de pendiendo de su valor en DATA-->
             <span
               >{{changePercent > 0 ? '👍':changePercent < 0 ? '👎':'🤞'}}</span
@@ -58,10 +67,22 @@
         </ul>-->
         <button v-on:click="toggleShowPrices">{{ showPrices ? 'Ocultar precios' : 'Mostrar precios'}}</button>
         <ul v-show=showPrices>
-          <li v-for="(p, i) in pricesWithDays" v-bind:key="p.day">
+          
+          <!-- usamos v-bind para modificar la clase la cual tiene un objeto adentro -->
+          <li 
+            v-bind:class="{orange: p.value === price, green: p.value > price, red: p.value < price}"
+            v-for="(p, i) in pricesWithDays" 
+            v-bind:key="p.day">
             {{ i }} - {{ p.day }}: ${{ p.value }}
           </li>
         </ul>
+      </div>
+      <div>
+        <h3>Ingresa la cantidad en dolares</h3>
+        <input v-model="value" type="number" class="no-spinners">
+        <br>
+        <p>Cantidad en bitcoin que puedes comprar:</p>
+        <span>{{ convertdValue }}</span>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>

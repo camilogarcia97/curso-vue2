@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Mis Cursos de Platzi💚</title>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <h1 class="title">Mis Cursos de Platzi💚</h1>
+      <div class="form">
+        <input
+          v-model="title"
+          class="input"
+          type="text"
+          placeholder="Título del curso"
+        />
+        <input
+          v-model="hours"
+          class="input"
+          type="number"
+          placeholder="Horas"
+        />
+        <span>{{courses}}</span>
+        <button v-on:click="addCourse" class="btn">Guardar Curso</button>
+      </div>
+      <div class="course-list">
+        <h3>Lista de Cursos</h3>
+        <p v-if="courses.lenght<1" class="message red">
+          {{ listOfCourse }}Aún no has realizado cursos
+        </p>
+        <div>
+          <ol>
+            <!-- Lista de cursos -->
+          </ol>
+          <hr class="divider" />
+          <p>
+            Llevo <strong>{{ totalTime }}</strong> horas aprendiendo en Platzi.
+            <b>#NuncaParesDeAprender 💚</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
