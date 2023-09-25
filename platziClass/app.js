@@ -1,5 +1,12 @@
 Vue.component("coinDetail", {
-  props: ["changePercent", "title", "img1", "name", "price", "toggleShowPrices"],
+  props: [
+    "changePercent",
+    "title",
+    "img1",
+    "name",
+    "price",
+    "pricesWithDays",
+  ],
 
   data() {
     return {
@@ -26,7 +33,8 @@ Vue.component("coinDetail", {
 
     // Emitir un evento cuando el mouse se coloca sobre la imagen
     emitImageMouseover() {
-      this.imgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdv_YPE5XKr4_2KlmIgIC9y47OnUY2FGljrg&usqp=CAU";
+      this.imgSrc =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdv_YPE5XKr4_2KlmIgIC9y47OnUY2FGljrg&usqp=CAU";
       this.$emit("changeImg", this.name);
     },
 
@@ -81,6 +89,17 @@ Vue.component("coinDetail", {
         <p>Cantidad en bitcoin que puedes comprar:</p>
         <span>{{ convertdValue }}</span>
       </div>
+      <button v-on:click="toggleShowPrices">
+        {{ showPrices ? 'Ocultar precios' : 'Mostrar precios'}}
+      </button>
+      <ul v-show="showPrices">
+              <li
+                v-bind:class="{orange: p.value === price, green: p.value > price, red: p.value < price}"
+                v-for="(p, i) in pricesWithDays"
+                v-bind:key="p.day">
+                {{ i }} - {{ p.day }} - {{ p.value }}
+              </li>
+            </ul>
   </div>
    
   `,
@@ -97,11 +116,8 @@ new Vue({
       img2: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdv_YPE5XKr4_2KlmIgIC9y47OnUY2FGljrg&usqp=CAU",
       changePercent: 10,
       price: 5000,
-      prices: [8466, 7900, 3251, 5825, 7845, 5021, 4859],
       color: "F1F1F1",
       txtColor: "#000000",
-
-      value: 0,
 
       pricesWithDays: [
         { day: "lunes", value: 1000 },
@@ -112,8 +128,6 @@ new Vue({
         { day: "sábado", value: 6000 },
         { day: "domingo", value: 7000 },
       ],
-
-      showPrices: false,
     };
   },
 
