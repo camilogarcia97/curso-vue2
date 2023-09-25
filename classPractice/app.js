@@ -3,15 +3,15 @@ new Vue({
 
   data() {
     return {
-      title: "",
-      hours: "",
+      title: '',
+      hours: '',
       courses: [],
     };
   },
 
   computed: {
-    listOfCourse() {
-      return `${this.courses}`;
+    totalTime: function() {
+      return this.courses.reduce((total, course) => total + course.hours, 0);
     },
   },
 
@@ -22,11 +22,10 @@ new Vue({
           title: this.title,
           hours: parseInt(this.hours),
         });
-        console.log(this.courses);
+        //console.log(this.courses);
         this.title = "";
         this.hours = "";
       }
-      console.log(this.courses);
     },
   },
 });

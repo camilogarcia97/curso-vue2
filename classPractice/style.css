@@ -16,6 +16,11 @@ body {
   margin: 0;
 }
 
+ol{
+  padding-left: 24px;
+  padding-bottom: 12px;
+}
+
 .container {
   width: 100%;
   max-width: 800px;

@@ -22,17 +22,19 @@
           type="number"
           placeholder="Horas"
         />
-        <span>{{courses}}</span>
         <button v-on:click="addCourse" class="btn">Guardar Curso</button>
       </div>
       <div class="course-list">
         <h3>Lista de Cursos</h3>
-        <p v-if="courses.lenght<1" class="message red">
-          {{ listOfCourse }}Aún no has realizado cursos
+        <p v-if="courses.length<1" class="message red">
+          Aún no has realizado cursos
         </p>
         <div>
           <ol>
             <!-- Lista de cursos -->
+            <li v-for="course in courses">
+              {{ course.title }} - {{ course.hours }} horas
+            </li>
           </ol>
           <hr class="divider" />
           <p>
@@ -42,5 +44,7 @@
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
