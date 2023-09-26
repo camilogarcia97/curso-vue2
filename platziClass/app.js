@@ -9,6 +9,16 @@ Vue.component("coinDetail", {
     };
   },
 
+  created () {
+    //En este metodo es bueno para hacer peticones de a una API rest
+    console.log("created coinDetail...");
+  },
+
+  mounted() {
+    //En este elemento ya tengo disponible el DOM, puedo interactuar con el
+    console.log("mounted coinDetail...");
+  },
+
   computed: {
     title() {
       return `${this.coinData.name} - ${this.coinData.symbol}`;
@@ -143,6 +153,16 @@ new Vue({
       color: "#F1F1F1",
       txtColor: "#000000",
     };
+  },
+
+  created () {
+    //En este metodo es bueno para hacer peticones de a una API rest
+    console.log("created...");
+  },
+
+  mounted() {
+    //En este elemento ya tengo disponible el DOM, puedo interactuar con el
+    console.log("mounted...");
   },
 
   /*watch: {
