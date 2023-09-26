@@ -27,6 +27,15 @@ Vue.component("coinDetail", {
       this.showPrices = !this.showPrices;
     },
 
+    darkMode() {
+      /*se envia un envento de esta forma, el nombre emitido
+      en este caso white-mode es el que se va usar
+      en el archivo html de la siguiente forma 
+      v-on:white-mode="darkMode" donde darkMode es el nombre 
+      del metodo en el componente padre */
+      this.$emit("white-mode");
+    },
+
     // Emitir un evento cuando el mouse se coloca sobre la imagen
     emitImageMouseover() {
       this.imgSrc =
@@ -43,6 +52,9 @@ Vue.component("coinDetail", {
 
   template: `
   <div>
+  <button v-on:click="darkMode">Dark mode</button>
+  <br>
+  <br>
     <img
     v-bind:src="imgSrc"
     v-on:mouseover="emitImageMouseover" 
@@ -96,6 +108,11 @@ Vue.component("coinDetail", {
                 {{ i }} - {{ p.day }} - {{ p.value }}
               </li>
             </ul>
+            <br>
+            <br>
+          <slot name="title"></slot>
+          <slot name="text1"></slot>
+          <slot name="text2"></slot>
   </div>
   
   `,
@@ -123,7 +140,7 @@ new Vue({
           { day: "domingo", value: 7000 },
         ],
       },
-      color: "F1F1F1",
+      color: "#F1F1F1",
       txtColor: "#000000",
     };
   },
@@ -138,12 +155,8 @@ new Vue({
 
   methods: {
     darkMode() {
-      this.color = this.color.split("").reverse().join("");
-      if (this.txtColor === "#000000") {
-        this.txtColor = "#FFFFFF";
-      } else {
-        this.txtColor = "#000000";
-      }
+      this.txtColor = this.txtColor === "#000000" ? "#FFFFFF" : "#000000";
+      this.color = this.color === "#F1F1F1" ? "#000000" : "#F1F1F1";
     },
 
     changeImg() {

@@ -9,18 +9,36 @@
   </head>
 
   <body>
-    <div id="app" :style="{background:  '#'+color, color: txtColor}">
+    <div id="app" :style="{background:color, color: txtColor}">
       <div class="top">
         <h1>Formas de mostrar datos en el DOM</h1>
-        <button v-on:click="darkMode">Dark mode</button>
+        
       </div>
       <div class="main">
         <!--Permite enlazar atributos HTML a datos en tu modelo de Vue-->
 
         <div class="text">
           <coin-detail
-            v-bind:coin-data="coinData"
-          ></coin-detail>
+            v-on:white-mode="darkMode"
+            v-bind:coin-data="coinData">
+            <!--  esta etiqueta <p></p> esta siendo inyectada al componente 
+                coin-detail, y esta inecion esta siendo recibida por la
+                etiqueta especial de vue <slot></slot>  -->
+            <template slot="title">
+            <h3># Usando la etiqueta especial slot</h3>
+            </template>
+            <template slot="text1">
+            <p>se usa para mostar contenido html inyectado de componente padre al componente hijo</p>
+            </template>
+            <template slot="text2">
+              <p><strong>Para agregar varias etiquetas <slot></slot> en un componente desde el 
+                componente padre se debe usar la etiqueta especial de vue 
+                *template template* y se debe especificar a que slot se esta haciendo
+                 referencia ej: *template slot="text">template* y en el lado del hijo
+                se debe especificar el nombre slot* name="text" slot*</strong></p>
+            </template>
+            
+          </coin-detail>
           <!--<coin-detail
             v-bind:img1="img1"
             v-bind:name="name"
