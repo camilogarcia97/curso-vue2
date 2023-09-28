@@ -1,0 +1,19 @@
+{
+  "name": "platzi-exchange",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "tailwindcss": "^1.1.2",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@ianaya89/vue-cli-plugin-tailwind": "~1.1.0",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "vite": "^4.4.9"
+  }
+}
