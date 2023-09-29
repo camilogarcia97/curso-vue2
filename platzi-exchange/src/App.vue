@@ -10,11 +10,11 @@ export default {
 
 </script>
 
-
-
 <template>
   <main>
-    <PxHeader></PxHeader>
+    <px-header></px-header>
+
+    <router-view container px-5 sm:px-20 py-20 flex justify-center />
   </main>
 </template>
 
